@@ -1,0 +1,39 @@
+.knotion-highlight {
+  background-color: rgba(255, 230, 0, 0.3);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.knotion-highlight:hover {
+  background-color: rgba(255, 230, 0, 0.5);
+}
+
+.knotion-overlay {
+  position: absolute;
+  z-index: 9999;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.knotion-overlay button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.knotion-overlay button:hover {
+  background: #357abd;
+}
+
+.knotion-overlay button:active {
+  background: #2a5f9e;
+} 

@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "KNotion",
+  "version": "0.1.0",
+  "description": "Web annotation and knowledge management tool",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "identity",
+    "identity.email"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "oauth2": {
+    "client_id": "301146784011-ineurnc627sp620al3ecl1vu4mb5rfa9.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "openid"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.google.com/*",
+      "https://*.googleapis.com/*"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhf8/ZvQxZ7U5ZK5l5ZwW5Q5Z5Q=="
+} 

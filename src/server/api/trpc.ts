@@ -6,11 +6,12 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC } from "@trpc/server";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "~/server/db";
+import { getServerAuthSession } from "~/server/auth";
 
 /**
  * 1. CONTEXT
@@ -25,8 +26,11 @@ import { db } from "~/server/db";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
+  const session = await getServerAuthSession();
+  
   return {
     db,
+    session,
     ...opts,
   };
 };
@@ -104,3 +108,23 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  * are logged in.
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
+
+/**
+ * Protected (authenticated) procedure
+ *
+ * This procedure ensures that the user is authenticated before running the procedure.
+ * It makes the user's session available in the context.
+ */
+export const protectedProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(({ ctx, next }) => {
+    if (!ctx.session || !ctx.session.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "You must be logged in" });
+    }
+    return next({
+      ctx: {
+        // Infers the session as non-nullable
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  });

@@ -29,6 +29,16 @@ await esbuild.build({
   target: ['chrome58'],
 });
 
+// Build contentScript.js
+await esbuild.build({
+  entryPoints: [path.join(__dirname, 'src/contentScript.ts')],
+  outfile: path.join(distDir, 'contentScript.js'),
+  bundle: true,
+  minify: true,
+  platform: 'browser',
+  target: ['chrome58'],
+});
+
 // Copy manifest.json
 fs.copyFileSync(
   path.join(__dirname, 'manifest.json'),
@@ -39,6 +49,12 @@ fs.copyFileSync(
 fs.copyFileSync(
   path.join(__dirname, 'popup.html'),
   path.join(distDir, 'popup.html')
+);
+
+// Copy contentStyle.css
+fs.copyFileSync(
+  path.join(__dirname, 'src/contentStyle.css'),
+  path.join(distDir, 'contentStyle.css')
 );
 
 // Create placeholder icons (1x1 transparent PNGs)

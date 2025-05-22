@@ -1,7 +1,7 @@
 // Constants
 const API_BASE_URL = 'http://localhost:3000'; // Change to your production URL in production
 const AUTH_SESSION_URL = `${API_BASE_URL}/api/auth/session`;
-const SAVE_URL = `${API_BASE_URL}/api/trpc/link.save`;
+const SAVE_URL = `${API_BASE_URL}/api/trpc/links.save`;
 
 // DOM Elements
 const saveBtn = document.getElementById('save-btn');
@@ -33,6 +33,11 @@ async function checkAuthStatus() {
     if (response.ok) {
       const data = await response.json();
       if (data && data.user) {
+        // Store the token in chrome.storage.local for content script to use
+        if (data.token) {
+          chrome.storage.local.set({ knotion_auth_token: data.token });
+        }
+        
         // User is logged in
         loginContainer.style.display = 'none';
         saveContainer.style.display = 'block';

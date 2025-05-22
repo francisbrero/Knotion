@@ -14,6 +14,43 @@ const scraper = metascraper([
 ]);
 
 export const linksRouter = createTRPCRouter({
+  // Get a link by URL for the current user
+  getByUrl: publicProcedure
+    .input(z.object({ url: z.string().url() }))
+    .query(async ({ ctx, input }) => {
+      const session = await getServerAuthSession();
+      
+      if (!session?.user) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "You must be logged in to view links",
+        });
+      }
+
+      const link = await ctx.db.link.findFirst({
+        where: { 
+          url: input.url,
+          ownerId: session.user.id 
+        },
+        include: {
+          tags: {
+            include: {
+              tag: true,
+            },
+          },
+        },
+      });
+
+      if (!link) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Link not found",
+        });
+      }
+
+      return link;
+    }),
+
   // Save a link from the Chrome extension
   save: publicProcedure
     .input(

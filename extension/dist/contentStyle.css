@@ -1,0 +1,70 @@
+.knotion-toolbar {
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 6px 10px;
+  z-index: 10000;
+}
+
+.knotion-toolbar button {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.knotion-toolbar button:hover {
+  background-color: #0051a8;
+}
+
+.knotion-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  animation: knotion-notification-slide-in 0.3s ease;
+}
+
+.knotion-notification.success {
+  background-color: #10b981;
+}
+
+.knotion-notification.error {
+  background-color: #ef4444;
+}
+
+.knotion-highlight {
+  transition: background-color 0.2s;
+}
+
+.knotion-highlight:hover {
+  background-color: rgba(255, 230, 0, 0.5) !important;
+}
+
+.knotion-tooltip {
+  max-width: 250px;
+  font-size: 12px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  pointer-events: none;
+}
+
+@keyframes knotion-notification-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+} 

@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm prisma generate && pnpm build",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "functions": {
+    "api/**/*": {
+      "memory": 1024
+    }
+  },
+  "outputFileTracing": true,
+  "files": [
+    "prisma/schema.prisma",
+    ".env",
+    ".env.production",
+    "node_modules/.prisma"
+  ]
+} 

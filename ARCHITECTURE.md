@@ -276,7 +276,7 @@ graph LR
 - Extension-specific tests for DOM manipulation
 
 ### 7.2 Testing Tools
-- Jest for unit testing
+- Vitest for unit testing
 - React Testing Library for component tests
 - Cypress for E2E testing
 - Chrome Extension testing utilities
@@ -306,4 +306,29 @@ graph LR
 - Regular dependency updates
 - Code quality monitoring
 - Performance benchmarking
-- Security audits 
+- Security audits
+
+## Tech Stack
+
+### Frontend
+- React with TypeScript for type safety
+- Tailwind CSS for styling
+- React Router for navigation
+- React Query for data fetching and caching
+
+### Backend
+- Firebase Authentication for user management
+- Cloud Firestore for data storage
+- Firebase Security Rules for data protection
+- Firebase Cloud Functions for serverless operations
+
+### Testing
+- Vitest for unit and integration testing
+- React Testing Library for component testing
+- Firebase Emulator Suite for local development and testing
+
+### Development Tools
+- ESLint for code linting
+- Prettier for code formatting
+- TypeScript for static type checking
+- GitHub Actions for CI/CD 
